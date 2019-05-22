@@ -47,6 +47,14 @@ void pushInt(DataStack *data, int value);
 */
 void pushString(DataStack *data, String *value);
 
+
+/**
+Funzione di DataStack
+Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
+*/
+void pushFloat(DataStack *data, float value);
+
+
 /** Costruttore di String.
 * Parametri:
 * *variable: puntatore ad oggetto Stringa precedentemente definito
@@ -62,7 +70,7 @@ int main()
     printf("pointer: %p\n", data.pointer);
     pushInt(&data, 59);
     printf("pointer: %p\n", data.pointer);
-    pushInt(&data, 485738);
+    pushFloat(&data, 4857.356);
     printf("pointer: %p\n", data.pointer);
     pushChar(&data, '#');
     printf("pointer: %p\n", data.pointer);
@@ -72,6 +80,7 @@ int main()
     printf("pointer: %p\n", data.pointer);
     pushInt(&data, 301);
     printf("pointer: %p\n\n", data.pointer);
+    pushFloat(&data, 2.343434324);
 
 
     void *p;
@@ -82,7 +91,6 @@ int main()
         char *c = p;
         printf("%d:\t%c\tchar->ashii\t%d\n", i, *c, *c);
     }
-
     return 0;
 }
 
@@ -128,14 +136,18 @@ void pushInt(DataStack *data, int value)
 
 void pushString(DataStack *data, String *value)
 {
+    // Scrivo il tipo nella prima posizione disponibile
     char *c;
     c = data->pointer;
     *c = 's';
+    //Incremento di 8bit
     data->pointer++;
 
+    // Punto alla prossima memoria libera
     c = data->pointer;
+    // Alloco una stringa
     strncpy(c, value->array, strlen(value->array));
-
+    //Lascio lo spazio per '\0'
     data->pointer = data->pointer + strlen(value->array) + 1;
 
     /*
@@ -152,6 +164,24 @@ void pushString(DataStack *data, String *value)
     }
     *c='\0';
     data->pointer++;*/
+}
+
+void pushFloat(DataStack *data, float value)
+{
+    char *c;
+    // -> perché data è un puntatore
+    // operazione equivalente: c=*data.pointer;
+    c = data->pointer;
+    // Salvo il carattere nella prima posizione disponibile
+    *c = 'f';
+    // Dato che ho scritto solamente 8bit incremento il puntatore (dafault: 8bit)
+    data->pointer++;
+    float *real;
+    real = data->pointer;
+    *real = value;
+    // Dopo aver salvato il tipo e il valore incremento il puntatore alla prossima
+    // area libera di 4Byte
+    data->pointer += sizeof(float);
 }
 
 void assign(String *variable, const char *str)
