@@ -20,3 +20,19 @@
 	<stdlib.h>
 	<string.h>
 
+1558539674 source:c:\git\telavm\telavm code\main.c
+	<stdio.h>
+	<stdlib.h>
+	"DataString.h"
+	"DataStack.h"
+
+1558536133 c:\git\telavm\telavm code\datastring.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1558539948 c:\git\telavm\telavm code\datastack.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

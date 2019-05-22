@@ -139,8 +139,11 @@ void pushString(DataStack *data, String *value)
     c = data->pointer;
     // Alloco una stringa
     strncpy(c, value->array, strlen(value->array));
-    //Lascio lo spazio per '\0'
-    data->pointer = data->pointer + strlen(value->array) + 1;
+    data->pointer = data->pointer + strlen(value->array);
+    //aggiungo il terminatore per dire che è finita la stringa
+    char* terminator = data->pointer;
+    *terminator = '\0';
+    data->pointer++;
 
     /*
     c = data->pointer;
