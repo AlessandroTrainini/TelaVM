@@ -1,10 +1,21 @@
 # depslib dependency file v1.0
-1558522581 source:d:\git\telavm\telavm code\main.c
+1558530577 source:d:\git\telavm\telavm code\main.c
+	<stdio.h>
+	<stdlib.h>
+	"DataString.h"
+	"DataStack.h"
+
+1558527958 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1558527958 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
+1558530460 d:\git\telavm\telavm code\datastring.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1558530589 d:\git\telavm\telavm code\datastack.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
