@@ -3,27 +3,38 @@
 #include "DataString.h"
 #include "DataStack.h"
 
+typedef struct{
+    String name;
+    char type;
+}VarRecord;
+
+typedef struct record{
+    VarRecord *variables;
+    void* objectsPointer;
+    struct record* caller;
+    struct record* father;
+    char returnType;
+}ActivationRecord;
+
+/**
+Funzione che costruisce il VarStorage.
+capire quante sono in base al codice
+/**
+
+VarStor
+Funzione che costruisce il record di attivazione, passandogli l'indirizzo del suo spazio delle
+variabili
+*/
+ActivationRecord newAR(void *);
+
 int main()
 {
-    DataStack data = newDataStack();
-    pushInt(&data, 59);
-    pushFloat(&data, 4857.356);
-    pushChar(&data, '#');
-    String s = newString("Antonio");
-    pushString(&data, &s);
-    s = newString("Eil in di Eil");
-    pushString(&data, &s);
-    pushInt(&data, 301);
-    pushFloat(&data, 2.343434324);
 
-    void *p;
-    int i;
-    for(i = 0; i < 100; i++){
-        p = data.start;
-        p += i;
-        char *c = p;
-        printf("%d:\t%c\tchar->ashii\t%d\n", i, *c, *c);
-    }
-    printf("Dimensione memoria utilizzata: %d", getMemoryUsage(&data));
-    return 0;
 }
+
+ActivationRecord newAR(void *pointer){
+    ActivationRecord record;
+    record.objectsPointer = pointer;
+}
+
+
