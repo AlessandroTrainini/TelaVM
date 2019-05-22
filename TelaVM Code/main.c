@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define DIM 1000
+#define DIM_STACK 1000
+
 
 /** Struttura di contenimento di costanti e variabili dei record di attivazione.
 * *start: puntatore alla PRIMA area di memoria dello stack.
@@ -32,14 +33,19 @@ typedef struct
 DataStack newDataStack();
 
 /** Funzione di DataStack.
+* Aggiunge una variabile di tipo carattere a DataStack: tipo 'c' e valore passato.
+*/
+void pushChar(DataStack *data, char value);
+
+/** Funzione di DataStack.
 * Aggiunge una variabile di tipo intero a DataStack: tipo 'i' e valore passato.
 */
 void pushInt(DataStack *data, int value);
 
-/** Funzione di DataStack.
-* Aggiunge una variabile di tipo carattere a DataStack: tipo 'c' e valore passato.
+/** Funzione di DataStack
+* Aggiunge una variabile di tipo stringa a DataStack: tipo 's' e valore passato.
 */
-void pushChar(DataStack *data, char value);
+void pushString(DataStack *data, String *value);
 
 /** Costruttore di String.
 * Parametri:
@@ -48,6 +54,7 @@ void pushChar(DataStack *data, char value);
 * Oggetto allocato per riferimento.
 */
 void assign(String *,const char *);
+
 
 int main()
 {
@@ -58,13 +65,23 @@ int main()
     pushInt(&data, 485738);
     printf("pointer: %p\n", data.pointer);
     pushChar(&data, '#');
-    printf("pointer: %p\n\n\n", data.pointer);
+    printf("pointer: %p\n", data.pointer);
+    String s;
+    assign(&s, "monica");
+    pushString(&data, &s);
+    printf("pointer: %p\n", data.pointer);
+    pushInt(&data, 301);
+    printf("pointer: %p\n\n", data.pointer);
+
 
     void *p;
-    p = data.start;
-    p+=11;
-    char *c = p;
-    printf("%c", *c);
+    int i;
+    for(i = 0; i < 100; i++){
+        p = data.start;
+        p += i;
+        char *c = p;
+        printf("%d:\t%c\tchar->ashii\t%d\n", i, *c, *c);
+    }
 
     return 0;
 }
@@ -72,10 +89,23 @@ int main()
 DataStack newDataStack()
 {
     DataStack data;
-    data.start = malloc(DIM);
+    data.start = malloc(DIM_STACK);
     data.pointer = data.start;
     return data;
 
+}
+
+void pushChar(DataStack *data, char value)
+{
+    char *c;
+    c = data->pointer;
+    *c = 'c';
+    data->pointer++;
+    char *charac;
+    charac = data->pointer;
+    *charac = value;
+    // Operazione equivalente: *data.pointer++;
+    data->pointer += sizeof(char);
 }
 
 void pushInt(DataStack *data, int value)
@@ -96,17 +126,32 @@ void pushInt(DataStack *data, int value)
     data->pointer += sizeof(int);
 }
 
-void pushChar(DataStack *data, char value)
+void pushString(DataStack *data, String *value)
 {
     char *c;
     c = data->pointer;
-    *c = 'c';
+    *c = 's';
     data->pointer++;
-    char *charac;
-    charac = data->pointer;
-    *charac = value;
-    // Operazione equivalente: *data.pointer++;
-    data->pointer += sizeof(char);
+
+    c = data->pointer;
+    strncpy(c, value->array, strlen(value->array));
+
+    data->pointer = data->pointer + strlen(value->array) + 1;
+
+    /*
+    c = data->pointer;
+    char *stringa;
+    stringa = s->array;
+    int len = strlen(stringa);
+    int i;
+    for(i = 0; i < len; i++) {
+        *c = *stringa;
+        stringa++;
+        data->pointer++;
+        c = data->pointer;
+    }
+    *c='\0';
+    data->pointer++;*/
 }
 
 void assign(String *variable, const char *str)
