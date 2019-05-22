@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1558478195 source:d:\git\telavm\telavm code\main.c
+1558522581 source:d:\git\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
 1558518703 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
 	<stdio.h>

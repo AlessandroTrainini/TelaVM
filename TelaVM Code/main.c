@@ -41,6 +41,14 @@ void pushInt(DataStack *data, int value);
 */
 void pushChar(DataStack *data, char value);
 
+
+/**
+Funzione di DataStack
+Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
+*/
+void pushFloat(DataStack *data, float value);
+
+
 /** Costruttore di String.
 * Parametri:
 * *variable: puntatore ad oggetto Stringa precedentemente definito
@@ -55,16 +63,16 @@ int main()
     printf("pointer: %p\n", data.pointer);
     pushInt(&data, 59);
     printf("pointer: %p\n", data.pointer);
-    pushInt(&data, 485738);
+    pushFloat(&data, 4857.356);
     printf("pointer: %p\n", data.pointer);
     pushChar(&data, '#');
     printf("pointer: %p\n\n\n", data.pointer);
 
     void *p;
     p = data.start;
-    p+=11;
-    char *c = p;
-    printf("%c", *c);
+    p+=6;
+    float *c = p;
+    printf("%f", *c);
 
     return 0;
 }
@@ -107,6 +115,24 @@ void pushChar(DataStack *data, char value)
     *charac = value;
     // Operazione equivalente: *data.pointer++;
     data->pointer += sizeof(char);
+}
+
+void pushFloat(DataStack *data, float value)
+{
+    char *c;
+    // -> perché data è un puntatore
+    // operazione equivalente: c=*data.pointer;
+    c = data->pointer;
+    // Salvo il carattere nella prima posizione disponibile
+    *c = 'f';
+    // Dato che ho scritto solamente 8bit incremento il puntatore (dafault: 8bit)
+    data->pointer++;
+    float *real;
+    real = data->pointer;
+    *real = value;
+    // Dopo aver salvato il tipo e il valore incremento il puntatore alla prossima
+    // area libera di 4Byte
+    data->pointer += sizeof(float);
 }
 
 void assign(String *variable, const char *str)
