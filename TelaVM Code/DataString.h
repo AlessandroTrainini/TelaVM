@@ -18,6 +18,8 @@ typedef struct
 */
 void assign(String *,const char *);
 
+String newString(const char *);
+
 void assign(String *variable, const char *str)
 {
     if(variable)
@@ -27,4 +29,11 @@ void assign(String *variable, const char *str)
         variable->array=(char*)calloc(strlen(str),sizeof(char));
         strncpy(variable->array,str,strlen(str));
     }
+}
+
+String newString(const char *str)
+{
+    String s;
+    assign(&s, str);
+    return s;
 }

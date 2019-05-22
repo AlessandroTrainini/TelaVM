@@ -9,10 +9,9 @@ int main()
     pushInt(&data, 59);
     pushFloat(&data, 4857.356);
     pushChar(&data, '#');
-    String s;
-    assign(&s, "Antonio");
+    String s = newString("Antonio");
     pushString(&data, &s);
-    assign(&s, "Mauriziooooooo");
+    s = newString("Eil in di Eil");
     pushString(&data, &s);
     pushInt(&data, 301);
     pushFloat(&data, 2.343434324);
