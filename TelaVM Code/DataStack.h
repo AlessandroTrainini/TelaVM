@@ -40,23 +40,21 @@ void pushInt(DataStack *data, int value);
 */
 void pushString(DataStack *data, String *value);
 
-
-/**
-Funzione di DataStack
-Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
+/** Funzione di DataStack
+* Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
 */
 void pushFloat(DataStack *data, float value);
 
-/**
-Funzione che ritorna la dimensione attuale della memoria utilizzata, facendo
-la differenza tra i puntatori "pointer" e "start"
+/** Funzione di DataStack
+* Ritorna la dimensione attuale della memoria utilizzata, facendo
+* la differenza tra i puntatori "pointer" e "start"
 */
-
-void* getPointer(DataStack* data)
-{
-    return data->pointer;
-}
 int getMemoryUsage(DataStack* data);
+
+/** Funzione di Datastack
+* Ritorna il puntatore alla prima posizione libera nella memoria
+*/
+void* getPointer(DataStack* data);
 
 /* solo in caso di debug
 int main()
@@ -179,4 +177,9 @@ void pushFloat(DataStack *data, float value)
 int getMemoryUsage(DataStack* data)
 {
     return (int) data->pointer - (int) data->start;
+}
+
+void* getPointer(DataStack* data)
+{
+    return data->pointer;
 }

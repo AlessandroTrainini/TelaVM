@@ -8,6 +8,8 @@ typedef struct{
     char type;
 }VarRecord;
 
+// Guida void pointer
+//https://italiancoders.it/allocazione-dinamica-della-memoria-usi-e-costumi-del-puntatore-void/
 typedef struct record{
     VarRecord *variables;
     void* objectsPointer;
@@ -19,8 +21,9 @@ typedef struct record{
 /**
 Funzione che costruisce il VarStorage.
 capire quante sono in base al codice
-/**
+*/
 
+/**
 VarStor
 Funzione che costruisce il record di attivazione, passandogli l'indirizzo del suo spazio delle
 variabili
@@ -29,7 +32,7 @@ ActivationRecord newAR(void *);
 
 int main()
 {
-
+    return 0;
 }
 
 ActivationRecord newAR(void *pointer){

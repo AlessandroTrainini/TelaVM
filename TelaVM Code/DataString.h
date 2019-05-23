@@ -10,7 +10,12 @@ typedef struct
     char *array;
 }String;
 
-/** Costruttore di String.
+/** Costruttuttore della classe String
+* Parametro: puntatore ad un array di caratteri
+*/
+String newString(const char *);
+
+/** Assegnamento di una stringa.
 * Parametri:
 * *variable: puntatore ad oggetto Stringa precedentemente definito
 * *str: puntatore al primo elemento di un array di caratteri
@@ -18,7 +23,12 @@ typedef struct
 */
 void assign(String *,const char *);
 
-String newString(const char *);
+String newString(const char *str)
+{
+    String s;
+    assign(&s, str);
+    return s;
+}
 
 void assign(String *variable, const char *str)
 {
@@ -29,11 +39,4 @@ void assign(String *variable, const char *str)
         variable->array=(char*)calloc(strlen(str),sizeof(char));
         strncpy(variable->array,str,strlen(str));
     }
-}
-
-String newString(const char *str)
-{
-    String s;
-    assign(&s, str);
-    return s;
 }
