@@ -38,7 +38,7 @@ void pushInt(DataStack *data, int value);
 /** Funzione di DataStack
 * Aggiunge una variabile di tipo stringa a DataStack: tipo 's' e valore passato.
 */
-void pushString(DataStack *data, String *value);
+void pushString(DataStack *, char*);
 
 
 /**
@@ -126,7 +126,7 @@ void pushInt(DataStack *data, int value)
     data->pointer += sizeof(int);
 }
 
-void pushString(DataStack *data, String *value)
+void pushString(DataStack *data, char* value)
 {
     // Scrivo il tipo nella prima posizione disponibile
     char *c;
@@ -138,9 +138,9 @@ void pushString(DataStack *data, String *value)
     // Punto alla prossima memoria libera
     c = data->pointer;
     // Alloco una stringa
-    strncpy(c, value->array, strlen(value->array));
+    strncpy(c, value, strlen(value));
     //Lascio lo spazio per '\0'
-    data->pointer = data->pointer + strlen(value->array) + 1;
+    data->pointer = data->pointer + strlen(value) + 1;
 
     /*
     c = data->pointer;
@@ -180,3 +180,5 @@ int getMemoryUsage(DataStack* data)
 {
     return (int) data->pointer - (int) data->start;
 }
+
+
