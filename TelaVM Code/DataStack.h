@@ -12,7 +12,6 @@
 */
 typedef struct
 {
-    int dimension;
     void *start;
     void *pointer;
 }DataStack;

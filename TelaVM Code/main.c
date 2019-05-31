@@ -42,6 +42,7 @@ int main()
     s = newString("Eil in di Eil");
     pushString(&data, &s);
     printf("\n\n\n%s\n\n\n", pointer);
+    printf("Data usage: %d" + getMemoryUsage(&data));
     pushInt(&data, 301);
     pushFloat(&data, 2.343434324);
     pushFloat(&data, 2.343434324);

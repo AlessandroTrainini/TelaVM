@@ -5,7 +5,7 @@
 	"DataString.h"
 	"DataStack.h"
 
-1558553128 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
+1558608976 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
 	"DataString.h"
@@ -21,9 +21,10 @@
 	<stdlib.h>
 	<string.h>
 
-<<<<<<< HEAD
+1558536133 D
+
 1558537274 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastring.h
-=======
+
 1558539674 source:c:\git\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
@@ -31,17 +32,19 @@
 	"DataStack.h"
 
 1558536133 c:\git\telavm\telavm code\datastring.h
->>>>>>> 981b8b3940573eb80b2285383822f0943ffac82e
+
+1558539948 b8b3940573eb80b2285383822f0943ffac82e
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-<<<<<<< HEAD
-1558538619 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastack.h
-=======
-1558539948 c:\git\telavm\telavm code\datastack.h
->>>>>>> 981b8b3940573eb80b2285383822f0943ffac82e
+1558608432 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastack.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+
+1558539948 c:\git\telavm\telavm code\datastack.h
 
