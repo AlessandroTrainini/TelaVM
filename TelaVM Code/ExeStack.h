@@ -72,7 +72,7 @@ void pushExeInt(ExeStack *data, int value)
 int pullExeInt(ExeStack *data) {
 
     data->pointer -= sizeof(int);
-    int* value = data->pointer;
+    int *value = data->pointer;
     return *value;
 }
 
@@ -109,10 +109,10 @@ void pushExeFloat(ExeStack *data, float value)
 /**
 * Rimuove e ritorna il valore di un float presente in cima alla pila
 */
-float* pullExeFloat(ExeStack *data) {
+float pullExeFloat(ExeStack *data) {
     float *real = data->pointer;
     data->pointer -= sizeof(real);
-    return real;
+    return *real;
 }
 
 /** Funzione di ExeStack
@@ -132,7 +132,17 @@ void* getExePointer(ExeStack* data)
     return data->pointer;
 }
 
-
+/**
+* Prende i 2 interi (in modo distruttivo) sulla cima della pila,
+* li somma e mette il risultato sulla cima della pila
+*/
+void addI(ExeStack* data) {
+    int dimensione = getMemoryExeUsage(data);
+    int a = pullExeInt(data);
+    int b = pullExeInt(data);
+    int c = a+b;
+    pushExeInt(data, c);
+}
 
 /**
 * Visualizza il contenuto dei primi 100 byte di memoria

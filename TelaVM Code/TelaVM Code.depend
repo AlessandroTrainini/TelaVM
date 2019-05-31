@@ -5,7 +5,7 @@
 	"DataStack.h"
 	"ExeStack.h"
 
-1559314506 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
+1559315752 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
 	"DataStack.h"
@@ -41,7 +41,7 @@
 	<stdlib.h>
 	<string.h>
 
-1559314087 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastack.h
+1559315633 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastack.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -55,7 +55,7 @@
 	<stdlib.h>
 	<string.h>
 
-1559315340 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\exestack.h
+1559316646 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\exestack.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
