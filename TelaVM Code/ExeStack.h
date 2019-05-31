@@ -15,60 +15,62 @@ typedef struct
     int dimension;
     void *start;
     void *pointer;
-}DataStack;
+}ExeStack;
 
-/** Costruttore di DataStack.
+/** Costruttore di ExeStack.
 * Allocati DIM blocchi di memoria con *p = malloc(n) (funzione che ritorna un
 * puntatore *p ad n caratteri consecutivi).
 * Salva il primo indirizzo di memoria e inizializza il puntatore.
-* Ritorna un oggetto Datastack.
+* Ritorna un oggetto ExeStack.
 */
-DataStack newDataStack();
+ExeStack newExeStack();
 
-/** Funzione di DataStack.
-* Aggiunge una variabile di tipo carattere a DataStack: tipo 'c' e valore passato.
+/** Funzione di ExeStack.
+* Aggiunge una variabile di tipo carattere a ExeStack: tipo 'c' e valore passato.
 */
-void pushChar(DataStack *data, char value);
+void pushExeChar(ExeStack *data, char value);
 
-/** Funzione di DataStack.
-* Aggiunge una variabile di tipo intero a DataStack: tipo 'i' e valore passato.
+/** Funzione di ExeStack.
+* Aggiunge una variabile di tipo intero a ExeStack: tipo 'i' e valore passato.
 */
-void pushInt(DataStack *data, int value);
+void pushExeInt(ExeStack *data, int value);
 
-/** Funzione di DataStack
-* Aggiunge una variabile di tipo stringa a DataStack: tipo 's' e valore passato.
+/** Funzione di ExeStack
+* Aggiunge una variabile di tipo stringa a ExeStack: tipo 's' e valore passato.
 */
-void pushString(DataStack *);
+void pushExeString(ExeStack *, char *c);
 
-/** Funzione di DataStack
-* Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
+/** Funzione di ExeStack
+* Aggiunge una variabile di tipo float a ExeStack: tipo 'f' e valore passato
 */
-void pushFloat(DataStack *data, float value);
+void pushExeFloat(ExeStack *data, float value);
 
-/** Funzione di DataStack
+/** Funzione di ExeStack
 * Ritorna la dimensione attuale della memoria utilizzata, facendo
 * la differenza tra i puntatori "pointer" e "start"
 */
-int getMemoryUsage(DataStack* data);
+int getMemoryExeUsage(ExeStack* data);
 
-/** Funzione di Datastack
+/** Funzione di ExeStack
 * Ritorna il puntatore alla prima posizione libera nella memoria
 */
-void* getPointer(DataStack* data);
+void* getExePointer(ExeStack* data);
+
+
 
 /* solo in caso di debug
 int main()
 {
-    DataStack data = newDataStack();
-    pushInt(&data, 59);
-    pushFloat(&data, 4857.356);
-    pushChar(&data, '#');
+    ExeStack data = newExeStack();
+    pushExeInt(&data, 59);
+    pushExeFloat(&data, 4857.356);
+    pushExeChar(&data, '#');
     String s = newString("Antonio");
-    pushString(&data, &s);
+    pushExeString(&data, &s);
     s = newString("Eil in di Eil");
-    pushString(&data, &s);
-    pushInt(&data, 301);
-    pushFloat(&data, 2.343434324);
+    pushExeString(&data, &s);
+    pushExeInt(&data, 301);
+    pushExeFloat(&data, 2.343434324);
 
     void *p;
     int i;
@@ -84,21 +86,17 @@ int main()
 
 
 
-DataStack newDataStack()
+ExeStack newExeStack()
 {
-    DataStack data;
+    ExeStack data;
     data.start = malloc(DIM_STACK);
     data.pointer = data.start;
     return data;
 
 }
 
-void pushChar(DataStack *data, char value)
+void pushExeChar(ExeStack *data, char value)
 {
-    char *c;
-    c = data->pointer;
-    *c = 'c';
-    data->pointer++;
     char *charac;
     charac = data->pointer;
     *charac = value;
@@ -106,16 +104,14 @@ void pushChar(DataStack *data, char value)
     data->pointer += sizeof(char);
 }
 
-void pushInt(DataStack *data, int value)
+char pullExeChar(ExeStack *data) {
+    data->pointer -= sizeof(char);
+    char* value = data->pointer;
+    return *value;
+}
+
+void pushExeInt(ExeStack *data, int value)
 {
-    char *c;
-    // -> perché data è un puntatore
-    // operazione equivalente: c=*data.pointer;
-    c = data->pointer;
-    // Salvo il carattere nella prima posizione disponibile
-    *c = 'i';
-    // Dato che ho scritto solamente 8bit incremento il puntatore (dafault: 8bit)
-    data->pointer++;
     int *integer;
     integer = data->pointer;
     *integer = value;
@@ -124,46 +120,25 @@ void pushInt(DataStack *data, int value)
     data->pointer += sizeof(int);
 }
 
-void pushString(DataStack *data)
-{
-    // Scrivo il tipo nella prima posizione disponibile
-    char *c;
-    c = data->pointer;
-    *c = 's';
-    //Incremento di 8bit
-    data->pointer++;
-    char* stringPointer = data->pointer;
-    *stringPointer = '\0';
-    /*
-    // Punto alla prossima memoria libera
-    c = data->pointer;
-    // Alloco una stringa
-    strncpy(c, value, strlen(value));
-    //Lascio lo spazio per '\0'
-    data->pointer = data->pointer + strlen(value) + 1;
-    strncpy(c, value, strlen(value));
-    data->pointer = data->pointer + strlen(value);
-    //aggiungo il terminatore per dire che è finita la stringa
-    char* terminator = data->pointer;
-    *terminator = '\0';*/
-    data->pointer++;
-    /*
-    c = data->pointer;
-    char *stringa;
-    stringa = s->array;
-    int len = strlen(stringa);
-    int i;
-    for(i = 0; i < len; i++) {
-        *c = *stringa;
-        stringa++;
-        data->pointer++;
-        c = data->pointer;
-    }
-    *c='\0';
-    data->pointer++;*/
+int pullExeInt(ExeStack *data) {
+
+    data->pointer -= sizeof(int);
+    int* value = data->pointer;
+    return *value;
 }
 
-void pushFloat(DataStack *data, float value)
+void pushExeString(ExeStack *data, char* value)
+{
+    char *c = data->pointer;
+    c = value;
+    data->pointer++;
+}
+
+char* pullExeString(ExeStack *data) {
+
+}
+
+void pushExeFloat(ExeStack *data, float value)
 {
     char *c;
     // -> perché data è un puntatore
@@ -181,17 +156,17 @@ void pushFloat(DataStack *data, float value)
     data->pointer += sizeof(float);
 }
 
-int getMemoryUsage(DataStack* data)
+int getMemoryExeUsage(ExeStack* data)
 {
     return (int) data->pointer - (int) data->start;
 }
 
-void* getPointer(DataStack* data)
+void* getExePointer(ExeStack* data)
 {
     return data->pointer;
 }
 
-void debug(DataStack* data)
+void debugExe(ExeStack* data)
 {
     void* p;
     int i;
@@ -203,8 +178,13 @@ void debug(DataStack* data)
     }
     printf("Dimensione memoria utilizzata: %d", getMemoryUsage(data));
 }
+
+void addI() {
+
+}
+
 /**
-void* get(DataStack* data, int index, void* startPoint)
+void* get(ExeStack* data, int index, void* startPoint)
 {
     if (index == 0)
         return startPoint++;

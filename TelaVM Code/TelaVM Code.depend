@@ -1,20 +1,51 @@
 # depslib dependency file v1.0
-1558564809 source:d:\git\telavm\telavm code\main.c
+1559146261 source:d:\git\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
 	"DataStack.h"
+	"ExeStack.h"
 
-1558527958 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
+1558553128 source:c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\main.c
 	<stdio.h>
 	<stdlib.h>
-	<string.h>
+	"DataString.h"
+	"DataStack.h"
 
 1558560905 d:\git\telavm\telavm code\datastring.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1558561727 d:\git\telavm\telavm code\datastack.h
+1559144347 d:\git\telavm\telavm code\datastack.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1558536133 D
+
+1558537274 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastring.h
+
+1558539674 source:c:\git\telavm\telavm code\main.c
+	<stdio.h>
+	<stdlib.h>
+	"DataString.h"
+	"DataStack.h"
+
+1558536133 c:\git\telavm\telavm code\datastring.h
+
+1558539948 b8b3940573eb80b2285383822f0943ffac82e
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1558538619 c:\users\franc\documents\università\terzo anno\lp\telavm\telavm code\datastack.h
+
+1558539948 c:\git\telavm\telavm code\datastack.h
+
+1559146798 d:\git\telavm\telavm code\exestack.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
