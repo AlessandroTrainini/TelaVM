@@ -27,22 +27,22 @@ DataStack newDataStack();
 /** Funzione di DataStack.
 * Aggiunge una variabile di tipo carattere a DataStack: tipo 'c' e valore passato.
 */
-void pushChar(DataStack *data, char value);
+void pushDataChar(DataStack *data, char value);
 
 /** Funzione di DataStack.
 * Aggiunge una variabile di tipo intero a DataStack: tipo 'i' e valore passato.
 */
-void pushInt(DataStack *data, int value);
+void pushDataInt(DataStack *data, int value);
 
 /** Funzione di DataStack
 * Aggiunge una variabile di tipo stringa a DataStack: tipo 's' e valore passato.
 */
-void pushString(DataStack *data, String *value);
+void pushDataString(DataStack *);
 
 /** Funzione di DataStack
 * Aggiunge una variabile di tipo float a DataStack: tipo 'f' e valore passato
 */
-void pushFloat(DataStack *data, float value);
+void pushDataFloat(DataStack *data, float value);
 
 /** Funzione di DataStack
 * Ritorna la dimensione attuale della memoria utilizzata, facendo
@@ -59,15 +59,15 @@ void* getPointer(DataStack* data);
 int main()
 {
     DataStack data = newDataStack();
-    pushInt(&data, 59);
-    pushFloat(&data, 4857.356);
-    pushChar(&data, '#');
+    pushDataInt(&data, 59);
+    pushDataFloat(&data, 4857.356);
+    pushDataChar(&data, '#');
     String s = newString("Antonio");
-    pushString(&data, &s);
+    pushDataString(&data, &s);
     s = newString("Eil in di Eil");
-    pushString(&data, &s);
-    pushInt(&data, 301);
-    pushFloat(&data, 2.343434324);
+    pushDataString(&data, &s);
+    pushDataInt(&data, 301);
+    pushDataFloat(&data, 2.343434324);
 
     void *p;
     int i;
@@ -81,8 +81,6 @@ int main()
     return 0;
 }*/
 
-
-
 DataStack newDataStack()
 {
     DataStack data;
@@ -92,7 +90,7 @@ DataStack newDataStack()
 
 }
 
-void pushChar(DataStack *data, char value)
+void pushDataChar(DataStack *data, char value)
 {
     char *c;
     c = data->pointer;
@@ -105,7 +103,7 @@ void pushChar(DataStack *data, char value)
     data->pointer += sizeof(char);
 }
 
-void pushInt(DataStack *data, int value)
+void pushDataInt(DataStack *data, int value)
 {
     char *c;
     // -> perché data è un puntatore
@@ -123,7 +121,7 @@ void pushInt(DataStack *data, int value)
     data->pointer += sizeof(int);
 }
 
-void pushString(DataStack *data, String *value)
+void pushDataString(DataStack *data)
 {
     // Scrivo il tipo nella prima posizione disponibile
     char *c;
@@ -131,17 +129,21 @@ void pushString(DataStack *data, String *value)
     *c = 's';
     //Incremento di 8bit
     data->pointer++;
-
+    char* stringPointer = data->pointer;
+    *stringPointer = '\0';
+    /*
     // Punto alla prossima memoria libera
     c = data->pointer;
     // Alloco una stringa
-    strncpy(c, value->array, strlen(value->array));
-    data->pointer = data->pointer + strlen(value->array);
+    strncpy(c, value, strlen(value));
+    //Lascio lo spazio per '\0'
+    data->pointer = data->pointer + strlen(value) + 1;
+    strncpy(c, value, strlen(value));
+    data->pointer = data->pointer + strlen(value);
     //aggiungo il terminatore per dire che è finita la stringa
     char* terminator = data->pointer;
-    *terminator = '\0';
+    *terminator = '\0';*/
     data->pointer++;
-
     /*
     c = data->pointer;
     char *stringa;
@@ -158,7 +160,7 @@ void pushString(DataStack *data, String *value)
     data->pointer++;*/
 }
 
-void pushFloat(DataStack *data, float value)
+void pushDataFloat(DataStack *data, float value)
 {
     char *c;
     // -> perché data è un puntatore
@@ -185,3 +187,32 @@ void* getPointer(DataStack* data)
 {
     return data->pointer;
 }
+
+void debug(DataStack* data)
+{
+    void* p;
+    int i;
+    for(i = 0; i < 100; i++){
+        p = data->start;
+        p += i;
+        char *c = p;
+        printf("%d:\t%c\tchar->ashii\t%d\n", i, *c, *c);
+    }
+    printf("Dimensione memoria utilizzata: %d", getMemoryUsage(data));
+}
+
+/**
+void* get(DataStack* data, int index, void* startPoint)
+{
+    if (index == 0)
+        return startPoint++;
+    char* startChar = startPoint;
+    switch (*startChar)
+    {
+        case 'i': startPoint+=sizeof(int)+1; get(data, index--, startPoint);break;
+        case 'f': startPoint+=sizeof(float)+1; get(data, index--, startPoint);break;
+        case 'c': startPoint+=sizeof(char)+1; get(data, index--, startPoint);break;
+        case 'b': startPoint+=sizeof(int)+1; get(data, index--, startPoint);break;
+        case 's': jumpString()
+    }
+}*/
